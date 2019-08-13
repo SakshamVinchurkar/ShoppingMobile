@@ -1,0 +1,13 @@
+{
+    "git.ignoreLimitWarning": true,
+    "search.smartCase": true,
+   
+    "files.exclude": {
+        "src/app/layouts/product/favourite-products": true,
+        "src/app/layouts/task-board": true,
+        "src/app/index/footer": true
+
+    }
+
+
+}

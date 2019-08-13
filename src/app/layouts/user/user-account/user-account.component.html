@@ -1,0 +1,16 @@
+<form>
+  <div class="row jumbotron container" >
+      <div class="col-md-6 mb-3">
+    <img [src]="loggedUser.avatar" *ngIf="loggedUser.avatar" [alt]="loggedUser.userName" style="width: 35%; height: 35%;" style="float: left">
+    <img src="../../../assets/img/malecostume-512.png" *ngIf="!loggedUser.avatar" [alt]="loggedUser.userName" style="width: 200px; height: 200px;" >
+  </div>
+    <div class="col-md-6 mb-3 text-left">
+        <br><br><br>
+    
+      <strong>
+      <label for="emailId" style="font-weight: bold">Email Id</label>
+      </strong>
+      <p style="font-size: 15px;">{{loggedUser.emailId}}</p>
+    </div>
+  </div>
+</form>

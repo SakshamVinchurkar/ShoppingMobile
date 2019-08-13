@@ -1,0 +1,103 @@
+<br>
+<div class="container">
+    <div class="row" *ngIf="authService.isAdmin()">
+        <div class="col-sm">
+            <div class="float-right">
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#exampleModalLong">
+          Add Product
+        </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="brand_select">Filter By Brands:</label>
+                <select class="form-control w-75" name="" id="brand_select" [(ngModel)]="selectedBrand">
+            <option [ngValue]="undefined" selected> ALL </option>
+          <option *ngFor="let brand of brands" [ngValue]="brand" >{{brand}}</option>
+          
+        </select>
+            </div>
+            <br>
+            <div class="form-inline">
+                <label for="">Search By Brands</label>
+                <br>
+
+                <input class="form-control form-control-md w-75" oninput="this.value =this.value.toUpperCase()" style="text-transform: uppercase; " type="text" placeholder="Search" aria-label="Search" [(ngModel)]="selectedBrand"> <i class="fa fa-search  fa-fw input-icon"
+                    aria-hidden="true"></i>
+
+            </div>
+
+        </div>
+        <div class="col-md-9">
+
+            <div class="container">
+                <app-card-loader [loop]="3" [height]="800" *ngIf="loading"></app-card-loader>
+                <div class="row" *ngIf="!loading">
+                    <!-- List of Products -->
+                    <div class="col-sm-3 mb-2" *ngFor="let product of productList | filterByBrand: selectedBrand | paginate: { itemsPerPage: 8, currentPage: page }">
+                        <div class="item">
+                            <div class=" mb-r">
+                                <!--Card-->
+                                <div class="card card-cascade wider">
+                                    <!--Card image-->
+                                    <a [routerLink]="['/products/product', product.$key]">
+                                        <div class="view overlay hm-white-slight" style="align-content: center">
+                                            <img [src]="product.productImageUrl" class="img-fluid" alt="" width="100%" height="60%" style="width: 100%; ">
+                                            <a>
+                                                <div class="mask waves-effect waves-light" mdbRippleRadius></div>
+                                            </a>
+                                        </div>
+                                    </a>
+                                    <!--/.Card image-->
+                                    <!--Card content-->
+                                    <div class="card-body text-center no-padding">
+                                        <!--Category & Title-->
+                                        <a class="text-muted">
+                                            <h5>{{ product.productCategory }}</h5>
+                                        </a>
+                                        <p class="card-title">
+                                            <strong>
+                        <a [routerLink]="['/products/product', product.$key]" routerLinkActive="router-link-active">{{
+                          product.productName }}</a>
+                      </strong>
+                                        </p>
+                                        <!--Description-->
+                                        <p class="card-text">{{ product.productDescription }}
+                                        </p>
+                                        <!--Card footer-->
+                                        <div class="card-footer">
+                                            <span class="left">₹ {{ product.productPrice }}</span>
+                                            <span class="right">
+                        
+                        <a placement="top" mdbTooltip="Add to Cart" container="body" (click)="addToCart(product)">
+                          <i class="fa fa-shopping-cart"></i>
+                        </a>
+                        <a placement="top" mdbTooltip="Remove Product" container="body" *ngIf="authService.isAdmin()"
+                          (click)="removeProduct(product.$key)">
+                          <i class="fa fa-trash"></i>
+                        </a>
+                      </span>
+                                        </div>
+
+                                    </div>
+                                    <!--/.Card content-->
+
+                                </div>
+                                <!--/.Card-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="text-center mt-3">
+                    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </div>
+            </div>
+            <!--/.Card-->
+        </div>
+    </div>
+</div>
+<app-add-product></app-add-product>

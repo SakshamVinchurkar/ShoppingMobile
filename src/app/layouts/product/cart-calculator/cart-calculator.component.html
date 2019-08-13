@@ -1,0 +1,45 @@
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+  <span >My cart</span>
+  <span class="badge badge-primary badge-pill">{{products.length}}</span>
+</h4>
+<ul class="list-group mb-3">
+  <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let product of products">
+    <div>
+      <h6 class="my-0 text-muted">{{product.productName}}</h6>
+    </div>
+    <span class="text-muted">₹ {{product.productPrice}}</span>
+  </li>
+  <hr>
+  <li class="list-group-item d-flex justify-content-between">
+    <span>Total (INR)</span>
+    <strong>₹ {{totalValue}}</strong>
+  </li>
+  <a class="btn btn-primary" [routerLink]="['/products/all-products']">Continue Shopping</a>
+  <a class="btn btn-primary" [routerLink]="[ '/' ]" data-toggle="modal" data-target="#thankyou" (click)='emptycart()'  >Checkout</a>
+  <a class="btn btn-default" [routerLink]="['/checkouts']">Checkout chf</a>
+  
+</ul>
+
+
+
+
+
+
+
+<!-- ******************************************************************************************** -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="thankyou" tabindex="-1" role="dialog" aria-labelledby="thankyou" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Thankyou For Shopping With US</h5>
+        <button type="button" [routerLink]="[ '/' ]" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+    </div>
+  </div>
+</div>
